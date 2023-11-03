@@ -89,7 +89,11 @@ const App = () => {
   };
 
   const handleDeleteSelected = () => {
-    const remainingImages = images.filter((image) => !image.selected);
+    const remainingImages = images
+      .filter((image) => !image.selected)
+      .map((img, index) =>
+        index === 0 ? { ...img, isFeature: true } : { ...img, isFeature: false }
+      );
     setImages(remainingImages);
   };
 
