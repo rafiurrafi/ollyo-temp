@@ -1,0 +1,10 @@
+img {
+  width: 150px;
+}
+body {
+  //   background-color: red;
+}
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
