@@ -4,7 +4,66 @@ img {
 body {
   //   background-color: red;
 }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .image-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: 200px;
+  grid-gap: 3rem;
+  div {
+    div {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  img {
+    border: 1px solid red;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.gallery-img-featured {
+  grid-row: 1 / 3;
+  grid-column: 1 / 3;
+}
+
+// buttons
+/* Styling for the button that looks like a checkbox */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px; /* Set the width and height to mimic a checkbox */
+  height: 20px;
+  border: 1px solid #888; /* Borders to resemble the checkbox outline */
+  border-radius: 3px; /* Rounded corners */
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: #fff; /* Background color for the checkbox */
+}
+
+/* Styling for when the button is checked */
+.custom-checkbox.checked {
+  background-color: #2196f3; /* Change the background color when checked */
+}
+
+/* Styling the pseudo-element as the checkmark inside the button */
+.custom-checkbox::before {
+  content: "✔"; /* Checkmark content */
+  display: none; /* Initially hidden */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff; /* Checkmark color */
+}
+
+/* Styling for when the button is checked, to show the checkmark */
+.custom-checkbox.checked::before {
+  display: block;
 }
