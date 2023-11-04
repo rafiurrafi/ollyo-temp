@@ -2,7 +2,7 @@ img {
   width: 150px;
 }
 body {
-  //   background-color: red;
+  background-color: rgb(159, 159, 159) (217, 0, 255);
 }
 .container {
   max-width: 1200px;
@@ -13,7 +13,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-rows: 200px;
   grid-auto-rows: 200px;
-  grid-gap: 3rem;
+  grid-gap: 2rem;
   div {
     div {
       height: 100%;
@@ -21,6 +21,7 @@ body {
     }
   }
   img {
+    border-radius: 1rem;
     border: 1px solid rgb(209, 207, 207);
     height: 100%;
     width: 100%;
@@ -47,47 +48,7 @@ body {
     }
   }
 }
-.gallery-img {
-  position: relative;
-  &:hover .gallery-img-overlay {
-    z-index: 1;
-    opacity: 1;
-  }
-  &:hover button {
-    opacity: 1;
-    z-index: 2;
-  }
-  button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    opacity: 0;
-    transition: 0.5s;
-  }
-  .gallery-img-selected ~ .gallery-img-overlay {
-    z-index: 1 !important;
-    opacity: 1 !important;
-  }
-  .gallery-img-selected ~ button {
-    z-index: 2 !important;
-    opacity: 1 !important;
-  }
-}
-.gallery-img-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #00000068;
-  z-index: -1;
-  opacity: 0;
-  transition: 0.5s;
-}
-.gallery-img-featured {
-  grid-row: 1 / 3;
-  grid-column: 1 / 3;
-}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -109,38 +70,3 @@ body {
 }
 
 // buttons
-/* Styling for the button that looks like a checkbox */
-.custom-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 20px; /* Set the width and height to mimic a checkbox */
-  height: 20px;
-  border: 1px solid #888; /* Borders to resemble the checkbox outline */
-  border-radius: 3px; /* Rounded corners */
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  background-color: #fff; /* Background color for the checkbox */
-}
-
-/* Styling for when the button is checked */
-.custom-checkbox.checked {
-  background-color: #2196f3; /* Change the background color when checked */
-}
-
-/* Styling the pseudo-element as the checkmark inside the button */
-.custom-checkbox::before {
-  content: "✔"; /* Checkmark content */
-  display: none; /* Initially hidden */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff; /* Checkmark color */
-}
-
-/* Styling for when the button is checked, to show the checkmark */
-.custom-checkbox.checked::before {
-  display: block;
-}

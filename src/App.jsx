@@ -1,64 +1,10 @@
 import { fakeImages } from "./service/fakeImageService";
 import "./app.scss";
 import { closestCenter, DndContext } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
-import {
-  SortableContext,
-  useSortable,
-  rectSwappingStrategy,
-} from "@dnd-kit/sortable";
+import { SortableContext, rectSwappingStrategy } from "@dnd-kit/sortable";
 import { useState } from "react";
 import imgPlaceholder from "./img/image.png";
-const CheckboxButton = ({ handleCheckboxClicked, id }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxClick = () => {
-    setIsChecked(!isChecked);
-    handleCheckboxClicked(id);
-  };
-
-  return (
-    <button
-      className={`custom-checkbox ${isChecked ? "checked" : ""}`}
-      onMouseDown={() => {
-        handleCheckboxClick();
-      }}
-    ></button>
-  );
-};
-
-function SortableItem({ image, handleCheckboxClick }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: image.id });
-  const style = { transform: CSS.Transform.toString(transform), transition };
-  return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      className={`gallery-img ${
-        image.isFeature ? "gallery-img-featured" : ""
-      } `}
-    >
-      <div
-        style={{ position: "relative", display: "inline-block" }}
-        onClick={() => console.log("Clicked")}
-      >
-        <img
-          src={image.src}
-          alt={`Image ${image.id}`}
-          className={`${image.selected ? "gallery-img-selected" : ""}`}
-        />
-        <CheckboxButton
-          handleCheckboxClicked={handleCheckboxClick}
-          id={image.id}
-        />
-        <div className="gallery-img-overlay"></div>
-      </div>
-    </div>
-  );
-}
+import SortableItem from "./sortable-item/sortable-item.component";
 
 const App = () => {
   const [images, setImages] = useState(fakeImages);
