@@ -5,13 +5,10 @@ import { CSS } from "@dnd-kit/utilities";
 import {
   SortableContext,
   useSortable,
-  rectSortingStrategy,
-  arrayMove,
   rectSwappingStrategy,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+import imgPlaceholder from "./img/image.png";
 const CheckboxButton = ({ handleCheckboxClicked, id }) => {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -48,12 +45,16 @@ function SortableItem({ image, handleCheckboxClick }) {
         style={{ position: "relative", display: "inline-block" }}
         onClick={() => console.log("Clicked")}
       >
-        <img src={image.src} alt={`Image ${image.id}`} />
-
+        <img
+          src={image.src}
+          alt={`Image ${image.id}`}
+          className={`${image.selected ? "gallery-img-selected" : ""}`}
+        />
         <CheckboxButton
           handleCheckboxClicked={handleCheckboxClick}
           id={image.id}
         />
+        <div className="gallery-img-overlay"></div>
       </div>
     </div>
   );
@@ -71,7 +72,6 @@ const App = () => {
     let newItems = [...images];
     const [removed] = newItems.splice(activeIndex, 1);
     newItems.splice(overIndex, 0, removed);
-    // let newItems = arrayMove(images, activeIndex, overIndex);
 
     newItems = newItems.map((img, index) =>
       index === 0 ? { ...img, isFeature: true } : { ...img, isFeature: false }
@@ -96,9 +96,31 @@ const App = () => {
       );
     setImages(remainingImages);
   };
-
+  const selectedItemsNumber = images.filter((image) => image.selected).length;
   return (
     <div className="container">
+      <div className="header">
+        <div>
+          {selectedItemsNumber ? (
+            <h3 className="header-title">
+              <button className={`custom-checkbox checked`}></button>
+              {selectedItemsNumber} files selected
+            </h3>
+          ) : (
+            <h3>Gallery</h3>
+          )}
+        </div>
+        <div>
+          {selectedItemsNumber ? (
+            <button
+              onClick={handleDeleteSelected}
+              className="header-delete-btn"
+            >
+              Delete Selected
+            </button>
+          ) : null}
+        </div>
+      </div>
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={images} strategy={rectSwappingStrategy}>
           <div className="image-container">
@@ -109,12 +131,13 @@ const App = () => {
                 handleCheckboxClick={handleCheckboxClick}
               />
             ))}
+            <div className="image-last-item">
+              <img src={imgPlaceholder} alt="" />
+              <a href="#">Add Image</a>
+            </div>
           </div>
         </SortableContext>
       </DndContext>
-      <button onClick={handleDeleteSelected} style={{ marginTop: 100 }}>
-        Delete Selected
-      </button>
     </div>
   );
 };
