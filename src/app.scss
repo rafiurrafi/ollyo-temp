@@ -1,12 +1,10 @@
-img {
-  width: 150px;
-}
 body {
   background-color: rgb(159, 159, 159) (217, 0, 255);
 }
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  background-color: white;
 }
 .image-container {
   display: grid;
@@ -53,6 +51,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid gray;
+  margin-bottom: 2rem;
   &-delete-btn {
     border: none;
     cursor: pointer;

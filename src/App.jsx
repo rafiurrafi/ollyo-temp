@@ -5,6 +5,7 @@ import {
   DndContext,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -21,9 +22,13 @@ const App = () => {
   const [images, setImages] = useState(fakeImages);
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
+    useSensor(
+      KeyboardSensor,
+      {
+        coordinateGetter: sortableKeyboardCoordinates,
+      },
+      useSensor(TouchSensor)
+    )
   );
   function handleDragEnd(e) {
     const { active, over } = e;
